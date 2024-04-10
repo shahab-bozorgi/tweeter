@@ -1,19 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+<script src="{% static "js/ajax.js" %}"></script>
 
 {% block content %}
 
-    <div class="container">
+    <div style="display: flex">
 
 
-        <form method="post">
+    <div>
+        <div class="">
+
+            {% if request.user.is_authenticated %}
+                {% if request.user.username %}
+
+                    <div class="">
+                    <div style="display: flex">
+                    {% if user.profile.image %}
+                        <span> <img src="{{ user.profile.image.url }}" width="70px" height="70px" alt=""
+                                    style="border-radius:100%"></span>
+
+                    {% else %}
+                        <span><img src="{% static 'images/default.png' %}" width="70px"
+                                   height="70px" alt="" style="border-radius:100%"></span>
+                    {% endif %}
+
+
+                    <div>
+                        <div>
+                            <h4 class="title_name">{{ request.user.username }}</h4>
+                        </div>
+
+                        <div>
+                            <h5 class="title_fname">
+                                {{ request.user.first_name }}</h5>
+                        </div>
+
+
+                    </div>
+
+                {% endif %}
+            {% endif %}
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="" style="padding-left: 18%">
+
+
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="input_tw">
                 <input class="form-control" id="input_tweet" name="description" type="text"
                        placeholder="What is happening?!">
             </div>
+
+            <div>
+                <input type="file" name="image" id="file-upload" class="file-input">
+            </div>
+
 
             <div style="padding: 1em">
                 <button class="btn bg-primary" type="submit">send</button>
@@ -22,99 +69,94 @@
         </form>
 
         <br><br>
-    </div>
-
-    <div class="container">
-
-        {% for item in tweet %}
-            {% if request.user.is_authenticated %}
 
 
+        <div class="container">
 
-                <div class="">
-                    <div style="display: flex">
+            {% for item in tweet %}
+                {% if request.user.is_authenticated %}
+
+
+
+                    <div class="">
+                    <div style="display: flex;  padding-top: 1em">
                         {% if user.profile.image %}
-                            <span style="margin-top: 0.7em"> <img src="{{ item.user.profile.image.url }}"
-                                                                  width="40px"
-                                                                  height="40px" alt=""
-                                                                  style="border-radius:100%"></span>
-
+                            <a class="comment-icon"
+                               href="{% url 'accounts:profile' item.user %}"><span class="img_url"> <img
+                                    src="{{ item.user.profile.image.url }}"
+                                    width="40px"
+                                    height="40px" alt=""
+                                    style="border-radius:100%"></span></a>
                         {% else %}
-                            <span><img src="{% static 'images/default.png' %}" width="40px"
-                                       height="40px" alt="" style="border-radius:100%"></span>
+
+                            <a class="comment-icon" href="{% url 'accounts:profile' item.user %}">
+
+                        <span class="img_url">
+
+                            <img src="{% static 'Default.png' %}" width="40px" height="40px" alt=""
+                                 style="border-radius:100%">
+
+                        </span>
+
+                            </a>
                         {% endif %}
 
 
-                        <h4 class="title_name"
-                            style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ item.user.first_name }}</h4>
-                        <h5 class="title_name"
-                            style="color: #5b5b5b; padding-top: 0.8em;padding-left: 0.5em;">
+                        <a class="comment-icon"
+                           href="{% url 'accounts:profile' item.user %}"><h4
+                                class="title_first_name">{{ item.user.first_name }}</h4>
+                        </a>
+                        <h5 class="title_username">
                             @{{ item.user.username }}</h5>
 
-                        <div style="  position: absolute;right: 28%;">
-                            <p class="description_tweet"
-                               style="color: #5B5B5BFF;  padding-left: 2em;padding-top: 1em;"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
+                        <div style="position: absolute;right: 25%;">
+                            <p class="tweet_time"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
                         </div>
 
 
                     </div>
 
-                    <p class="description_tweet"
-                       style="color: #e5e5e5;    padding-left: 2em;padding-top: 2em;"><a
-                            href="/comment/{{ item.id }}">{{ item.description }} </a></p>
+                    <p class="main_tweet">{{ item.description }}
+                    </p>
+                    <div class="image_div" style="margin: 0 auto;
+                    width: fit-content;">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" style="width:30em; height:20em ;right: 25%;">
+                        {% endif %}
+
+                    </div>
 
 
-                    <hr>
-                </div>
-            {% endif %}
-        {% endfor %}
+                    <div style="display: flex">
+                        <div style="padding-left: 1em;">
+
+                            <a class="comment-icon"
+                               href="comment/{{ item.id }}"><i class="fa fa-comment-o" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        {% if is_liked %}
+                            <div style="padding-left: 1em;">
+                            <a onclick="like( '{{ tweet.id }}')"> <i id="like" class="fa fa-heart-o"
+                                                                     aria-hidden="true"></i></a>
+                            <span id="count">{{ tweet.likes.all.count }}</span>
+                        {% else %}
+                            <div style="padding-left: 1em;">
+                            <a onclick="like( '{{ tweet.id }}')"> <i id="like" class="fa fa-heart-o"
+                                                                     aria-hidden="true"></i></a>
+                            <span id="count">{{ tweet.likes.all.count }}</span>
+
+                        {% endif %}
+
+                        </div>
+                        </div>
 
 
-
-
-        {#----------------------------------------------------#}
-
-        {#                {% for reply in comment.replies.all %}#}
-        {#                    <div class="replied">#}
-        {#                    <div style="display: flex">#}
-        {#                        {% if user.profile.image %}#}
-        {#                            <span style="margin-top: 0.7em"> <img src="{{ item.user.profile.image.url }}"#}
-        {#                                                                  width="40px"#}
-        {#                                                                  height="40px" alt=""#}
-        {#                                                                  style="border-radius:100%"></span>#}
-        {##}
-        {#                        {% else %}#}
-        {#                            <span><img src="{% static 'images/default.png' %}" width="40px"#}
-        {#                                       height="40px" alt="" style="border-radius:100%"></span>#}
-        {#                        {% endif %}#}
-        {##}
-        {##}
-        {#                        <h4 class="title_name"#}
-        {#                            style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ item.user.first_name }}</h4>#}
-        {#                        <h5 class="title_name"#}
-        {#                            style="color: #5b5b5b; padding-top: 0.8em;padding-left: 0.5em;">#}
-        {#                            @{{ item.user.username }}</h5>#}
-        {##}
-        {#                        <div style="  position: absolute;right: 28%;">#}
-        {#                            <p class="description_tweet"#}
-        {#                               style="color: #5B5B5BFF;  padding-left: 2em;padding-top: 1em;"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>#}
-        {#                        </div>#}
-        {##}
-        {##}
-        {#                    </div>#}
-        {##}
-        {#                    <p class="description_tweet"#}
-        {#                       style="color: #e5e5e5;    padding-left: 2em;padding-top: 2em;">{{ item.description }} </p>#}
-        {##}
-        {#                {% endfor %}#}
-        {#            <hr>#}
-        {#            </div>#}
-        {#            {% endif %}#}
-        {##}
-        {##}
-        {##}
-        {##}
-        {#        {% endfor %}#}
+                        <hr>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
     </div>
 
 
@@ -152,3 +194,5 @@
     </div>
 
 {% endblock %}
+</div>
+</div>

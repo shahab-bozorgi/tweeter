@@ -8,10 +8,10 @@
 </head>
 <!--ring div starts here-->
 <div class="ring">
-    <i style="--clr:#ffffff87;"></i>
-    <i style="--clr:#1D9BF0;"></i>
+{#    <i style="--clr:#ffffff87;"></i>#}
+{#    <i style="--clr:#1D9BF0;"></i>#}
     <div class="login">
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form method="post">
             {% csrf_token %}
             <div class="inputBx" style="padding-bottom: 1em;">
@@ -35,7 +35,7 @@
 
         <div class="links">
             <a href="#">Forget Password</a>
-            <a href="#">Signup</a>
+            <a href="{% url 'accounts:login' %}">Login</a>
         </div>
     </div>
 </div>

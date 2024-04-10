@@ -1,9 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 
+from home.models import Post
 
 
 def user_login(request):
@@ -49,3 +50,14 @@ def user_register(request):
     return render(request, 'accounts/register.html')
 
 
+# def user_profile(request, username):
+#     tweet = Post.objects.all()
+#     user = Post.objects.get(username=username)
+#     return render(request, 'accounts/profile.html', {'tweet':tweet, 'user': user})
+
+
+def user_profile(request, username):
+    user = User.objects.get(username=username)
+    tweet = Post.objects.filter(user=user.id).order_by('-created')
+
+    return render(request, 'accounts/profile.html', {'tweet':tweet, 'user': user})

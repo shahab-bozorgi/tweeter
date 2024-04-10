@@ -1,98 +1,110 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<head>
-    <title>Tweeter</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static "css/post.css" %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="/your-path-to-fontawesome/css/v5-font-face.css" rel="stylesheet"/>
-    <script src="https://kit.fontawesome.com/b0e8b56a0f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
 
-
-<body class="bgnd" style="background: rgb(22, 22, 22) !important;padding: 20px;">
-
-
-{#    <div class="container">#}
-<div class="">
-    <div class="" style="display: flex">
-        {% if tweet.user.profile.image %}
-            <span style="margin-top: 0.7em"> <img src="{{ tweet.user.profile.image.url }}"
-                                                  width="40px"
-                                                  height="40px" alt=""
-                                                  style="border-radius:100%"></span>
-
-        {% else %}
-            <span><img src="{% static 'images/default.png' %}" width="40px"
-                       height="40px" alt="" style="border-radius:100%"></span>
-        {% endif %}
-
-
-        <h4 class="title_name"
-            style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ tweet.user.first_name }}</h4>
-        <h5 class="title_name"
-            style="color: #5b5b5b; padding-top: 0.8em;padding-left: 0.5em;">
-            @{{ tweet.user.username }}</h5>
-
-        <div style="  position: absolute;right: 28%;">
-            <p class="description_tweet"
-               style="color: #5B5B5BFF;  padding-left: 2em;padding-top: 1em;"> {{ tweet.created|date:'j F' }}, {{ tweet.created|time }}  </p>
-        </div>
-
-
-    </div>
-
-    <p class="description_tweet"
-       style="color: #e5e5e5;    padding-left: 2em;padding-top: 2em;">{{ tweet.description }} </p>
-
-
-    <hr>
-</div>
+{% block content %}
 
 
 
+    <div class="reply_div">
+        <div class="" style="display: flex">
+            {% if tweet.user.profile.image %}
+                <a class="comment-icon"
+                   href="{% url 'accounts:profile' tweet.user %}"><span class="img_url"> <img
+                        src="{{ tweet.user.profile.image.url }}"
+                        width="40px"
+                        height="40px" alt=""
+                        style="border-radius:100%"></span></a>
 
-{% for item in tweet.reply.all %}
-    {% if comments.parent == None %}
-
-        <div class="container">
-            <div class="" style="display: flex">
-                {% if item.user.profile.image %}
-                    <span style="margin-top: 0.7em"> <img src="{{ item.user.profile.image.url }}"
-                                                          width="40px"
-                                                          height="40px" alt=""
-                                                          style="border-radius:100%"></span>
-
-                {% else %}
-                    <span><img src="{% static 'images/default.png' %}" width="40px"
-                               height="40px" alt="" style="border-radius:100%"></span>
-                {% endif %}
+            {% else %}
+                <span><img src="{% static 'images/default.png' %}" width="40px"
+                           height="40px" alt="" style="border-radius:100%"></span>
+            {% endif %}
 
 
-                <h4 class="title_name"
-                    style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ item.user.first_name }}</h4>
-                <h5 class="title_name"
-                    style="color: #5b5b5b; padding-top: 0.8em;padding-left: 0.5em;">
-                    @{{ item.user.username }}</h5>
+            <a class="comment-icon"
+               href="{% url 'accounts:profile' tweet.user %}"><h4 class="title_name"
+                                                                  style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ tweet.user.first_name }}</h4>
+            </a>
+            <h5 class="reply_top_title_name">
+                @{{ tweet.user.username }}</h5>
 
-                <div style="  position: absolute;right: 28%;">
-                    <p class="description_tweet"
-                       style="color: #5B5B5BFF;  padding-left: 2em;padding-top: 1em;"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
-                </div>
-
-
+            <div style="  position: absolute;right: 21%;">
+                <p class="description_tweet"> {{ tweet.created|date:'j F' }}, {{ tweet.created|time }}  </p>
             </div>
 
-            <p class="description_tweet"
-               style="color: #e5e5e5;    padding-left: 2em;padding-top: 2em;">{{ item.tweet }} </p>
 
-
-            <hr>
         </div>
-    {% endif %}
-{% endfor %}
-{#</div>#}
+
+        <p class="main_tweet">{{ tweet.description }} </p>
+
+
+        <hr>
+    </div>
+
+
+
+
+    {% for item in tweet.reply.all %}
+        {% if comments.parent == None %}
+
+            <div class="container">
+                <div class="" style="display: flex;  padding-top: 1em">
+                    {% if item.user.profile.image %}
+                        <a class="comment-icon"
+                           href="{% url 'accounts:profile' item.user %}"><span class="img_url"> <img
+                                src="{{ item.user.profile.image.url }}"
+                                width="40px"
+                                height="40px" alt=""
+                                style="border-radius:100%"></span></a>
+
+                    {% else %}
+                        <span><img src="{% static 'images/default.png' %}" width="40px"
+                                   height="40px" alt="" style="border-radius:100%"></span>
+                    {% endif %}
+
+
+
+                    <a class="comment-icon"
+                       href="{% url 'accounts:profile' item.user %}"><h4 class="title_first_name">{{ item.user.first_name }}</h4>
+                    </a>
+                    <h5 class="title_username">
+                        @{{ item.user.username }}</h5>
+
+                    <div style="  position: absolute;right: 28%;">
+                        <p class="tweet_time"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
+                    </div>
+
+
+                </div>
+
+                <p class="main_tweet">{{ item.tweet }} </p>
+
+
+                <hr>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+
+    <form class="form_bottom" method="post">
+        {% csrf_token %}
+        <div class="Pythonanywhere">
+            <div class="col-lg-12">
+                <input type="hidden" id="parent_id" value="{{ id }}" name="parent_id">
+            </div>
+
+            <div class="input_tw" style="display: flex">
+                <input class="form-control" id="input_tweet" name="reply" type="text"
+                       placeholder="What is happening?!">
+
+
+                <div style="padding: 1em">
+                    <button class="btn bg-primary" type="submit">send</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
