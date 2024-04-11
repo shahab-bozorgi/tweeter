@@ -22,6 +22,7 @@ def tweets(request):
         image = request.FILES.get('image')
 
         Post.objects.create(description=description, user_id=author.id, image=image)
+        return redirect('home:tweets')
 
     return render(request, 'home/tweeter.html', {'tweet': object_list})
 

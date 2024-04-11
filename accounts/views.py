@@ -58,6 +58,6 @@ def user_register(request):
 
 def user_profile(request, username):
     user = User.objects.get(username=username)
-    tweet = Post.objects.filter(user=user.id).order_by('-created')
+    tweet = Post.objects.filter(user=user.id).order_by('-id')
 
     return render(request, 'accounts/profile.html', {'tweet':tweet, 'user': user})

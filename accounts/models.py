@@ -12,6 +12,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    class Meta:
+        ordering = ('-id',)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
