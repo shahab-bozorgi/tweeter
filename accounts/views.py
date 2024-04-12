@@ -50,10 +50,11 @@ def user_register(request):
     return render(request, 'accounts/register.html')
 
 
-# def user_profile(request, username):
-#     tweet = Post.objects.all()
-#     user = Post.objects.get(username=username)
-#     return render(request, 'accounts/profile.html', {'tweet':tweet, 'user': user})
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+
 
 
 def user_profile(request, username):
