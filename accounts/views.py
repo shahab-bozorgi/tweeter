@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 
+from accounts.forms import UserEditForm
 from home.models import Post
 
 
@@ -62,3 +63,12 @@ def user_profile(request, username):
     tweet = Post.objects.filter(user=user.id).order_by('-id')
 
     return render(request, 'accounts/profile.html', {'tweet':tweet, 'user': user})
+
+
+def user_edit(request):
+    form = UserEditForm(instance=request.user)
+    if request.method == 'POST':
+        form = UserEditForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    return render(request, 'accounts/edit_profile.html', {'form': form})

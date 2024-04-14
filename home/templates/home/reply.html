@@ -38,6 +38,16 @@
 
         <p class="main_tweet">{{ tweet.description }} </p>
 
+        {% if item.image %}
+
+            <div class="image_div" style="margin: 0 auto;
+                                        width: fit-content;">
+                <img src="{{ item.image.url }}"
+                     style="width:30em; height:20em ;right: 25%;border-radius: 1em;">
+
+            </div>
+        {% endif %}
+
 
         <hr>
     </div>
@@ -66,7 +76,8 @@
 
 
                     <a class="comment-icon"
-                       href="{% url 'accounts:profile' item.user %}"><h4 class="title_first_name">{{ item.user.first_name }}</h4>
+                       href="{% url 'accounts:profile' item.user %}"><h4
+                            class="title_first_name">{{ item.user.first_name }}</h4>
                     </a>
                     <h5 class="title_username">
                         @{{ item.user.username }}</h5>
@@ -94,7 +105,7 @@
                 <input type="hidden" id="parent_id" value="{{ id }}" name="parent_id">
             </div>
 
-            <div class="input_tw" style="display: flex">
+            <div class="input_tw" style="display: flex; position: fixed">
                 <input class="form-control" id="input_tweet" name="reply" type="text"
                        placeholder="What is happening?!">
 

@@ -7,14 +7,10 @@
 
     {% if request.user.is_authenticated %}
         <div style="display: flex">
-
-
         <div>
-            <div class="">
 
-
+            <div>
                 {% if request.user.username %}
-
                     <div class="" style="position: fixed">
                     <div style="display: flex">
                     {% if user.profile.image %}
@@ -36,35 +32,39 @@
                             <h5 class="title_fname">
                                 {{ request.user.first_name }}</h5>
                         </div>
-
-
                     </div>
-
+                    <div style="padding-left: 10em;">
+                    <img src="{% static 'images/twitter_logo.png' %} " width="100px" height="100px" alt="">
+                </div>
 
                 {% endif %}
 
-
                 </div>
                 <div style="padding-left: 2.6em;padding-top: 8.6em;">
-
                     <a style="background: #484848;width: 9em;" href="{% url 'accounts:profile' request.user %}">
-                        <button style="width: 14em;background: #2c2c2c" type="button" class="btn btn-secondary btn-lg">
+                        <button style="width: 14em;background: #2c2c2c;color: white" type="button"
+                                class="btn btn-secondary btn-lg">
                             <i
                                     class="fa fa-user-circle" aria-hidden="true"></i>
                             Profile
                         </button>
                     </a>
-
                 </div>
 
-
+                <div style="padding-left: 2.6em;padding-top: 1em;">
+                    <a style="background: #484848;width: 9em;" href="{% url 'accounts:logout' %}">
+                        <button style="width: 14em;background: #2c2c2c; color: red" type="button"
+                                class="btn btn-secondary btn-lg">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            logout
+                        </button>
+                    </a>
+                </div>
                 </div>
             </div>
         </div>
 
         <div class="" style="padding-left: 29%">
-
-
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input_tw">
@@ -72,27 +72,27 @@
                            placeholder="What is happening?!">
                 </div>
 
-                <div>
-                    <input type="file" name="image" id="file-upload" class="file-input">
-                </div>
+                <div style="padding-left: 0.9em">
+                    {#                    <input type="file" name="image" id="file-upload" class="file-input">#}
+                    <label for="image-file">
 
+                        <img src="{% static 'images/free-gallery-187-902099.png' %}" style="width: 23px;height: 23px "
+                             alt="Default image" class="default-image">
+
+                        <input type="file" id="image-file" name="image" accept="image/*" style="display: none;">
+
+                    </label>
+                </div>
 
                 <div style="padding: 1em">
                     <button class="btn bg-primary" type="submit">send</button>
                 </div>
-
             </form>
-
             <br><br>
 
-
             <div class="container">
-
                 {% for item in tweet %}
                     {% if request.user.is_authenticated %}
-
-
-
                         <div class="">
                         <div style="display: flex;  padding-top: 1em">
                             {% if user.profile.image %}
@@ -103,16 +103,11 @@
                                         height="40px" alt=""
                                         style="border-radius:100%"></span></a>
                             {% else %}
-
                                 <a class="comment-icon" href="{% url 'accounts:profile' item.user %}">
-
-                        <span class="img_url">
-
-                            <img src="{% static 'Default.png' %}" width="40px" height="40px" alt=""
-                                 style="border-radius:100%">
-
-                        </span>
-
+                                    <span class="img_url"><img src="{% static 'Default.png' %}" width="40px"
+                                                               height="40px" alt=""
+                                                               style="border-radius:100%">
+                                    </span>
                                 </a>
                             {% endif %}
 
@@ -127,25 +122,21 @@
                             <div style="position: absolute;right: 25%;">
                                 <p class="tweet_time"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
                             </div>
-
-
                         </div>
 
                         <p class="main_tweet">{{ item.description }}
                         </p>
-                        <div class="image_div" style="margin: 0 auto;
-                    width: fit-content;">
-                            {% if item.image %}
+
+                        {% if item.image %}
+                            <div class="image_div" style="margin: 0 auto;
+                                        width: fit-content;">
                                 <img src="{{ item.image.url }}"
                                      style="width:30em; height:20em ;right: 25%;border-radius: 1em;">
-                            {% endif %}
-
-                        </div>
-
+                            </div>
+                        {% endif %}
 
                         <div style="display: flex">
                             <div style="padding-left: 1em;">
-
                                 <a class="comment-icon"
                                    href="comment/{{ item.id }}"><i class="fa fa-comment-o" aria-hidden="true"></i>
                                 </a>
@@ -160,13 +151,9 @@
                                 <a onclick="like( '{{ tweet.id }}')"> <i id="like" class="fa fa-heart-o"
                                                                          aria-hidden="true"></i></a>
                                 <span id="count">{{ tweet.likes.all.count }}</span>
-
                             {% endif %}
-
                             </div>
                             </div>
-
-
                             <hr>
                         </div>
                     {% endif %}
