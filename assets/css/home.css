@@ -1,0 +1,302 @@
+
+.bck_g {
+    background: rgb(22, 22, 22) !important;
+    padding: 20px;
+}
+
+#input_tweet {
+    background: rgb(22, 22, 22);
+    height: 3em;
+
+
+}
+
+.input_tw {
+    padding: 1em;
+}
+
+#s_tweet {
+    padding: 1em !important;
+}
+
+
+.container {
+    border-style: solid;
+    border-color: rgb(39 39 39);
+    width: 51em !important;
+
+}
+
+.body {
+    position: relative;
+}
+
+.value {
+    background-color: rgb(22, 22, 22);
+    color: rgb(231, 233, 234);
+}
+
+.post {
+    background-color: rgb(29, 155, 240);
+    width: 5rem;
+    border-radius: 0.5rem;
+}
+
+.btn-primary {
+    color: rgb(231, 233, 234) !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+.p_d {
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+.ul_tw {
+    color: rgb(231, 233, 234);
+}
+
+.box_twitt {
+    display: flex;
+    font-size: 1em;
+    flex-direction: column;
+
+    border-color: rgb(33 33 33);
+}
+
+.ul_div {
+    margin-left: 0em !important;
+    padding-left: 0em !important;
+}
+
+hr.line1 {
+    color: rgb(63, 63, 63) !important;
+}
+
+.top_twitt {
+    font-size: 1.5em;
+    color: rgb(29, 155, 240);
+    padding-left: 0.5em;
+}
+
+.bottom_twitt {
+    margin-right: 1em;
+    font-size: 1.3em;
+    margin-left: 1em;
+    padding-left: 0.5em;
+    margin-bottom: 0.3em;
+
+}
+
+.add_twitte {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-header {
+    padding: 15px;
+    border-bottom: beige;
+    background: black !important;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    background: black !important;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    background: black !important;
+}
+
+
+.description_tweet {
+    color: #e5e5e5;
+
+}
+
+.comment-icon:link {
+    color: #5b5b5b;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.comment-icon:visited {
+    color: #5b5b5b;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.comment-icon:hover {
+    color: #337ab7;
+    background-color: transparent;
+
+}
+
+.comment-icon:active {
+    color: #337ab7;
+    background-color: transparent;
+
+}
+
+ul.page-numbers {
+    text-align: center;
+    padding-top: 4em;
+}
+
+ul.page-numbers li {
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+ul.page-numbers li a {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    color: #7a7a7a;
+    border: 1px solid #eee;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+ul.page-numbers li.active a {
+    background-color: #337ab7;
+    border-color: #337ab7;
+    color: #fff;
+}
+
+ul.page-numbers li a:hover {
+    color: #fff;
+}
+
+.fa-angle-double-right:before {
+    content: "\f101";
+}
+
+.col-lg-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+.col-lg-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%
+}
+
+.comment-icon:link {
+    color: #5b5b5b;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.comment-icon:visited {
+    color: #5b5b5b;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.comment-icon:hover {
+    color: #337ab7;
+    background-color: transparent;
+
+}
+
+.comment-icon:active {
+    color: #337ab7;
+    background-color: transparent;
+
+}
+
+.title_name {
+    color: #e5e5e5;
+    padding-left: 0.5em;
+    padding-top: 0.4em
+}
+
+
+.title_fname {
+    color: #5b5b5b;
+    padding-left: 0.5em;
+}
+
+.img_url {
+    margin-top: 0.7em
+}
+
+.title_first_name {
+    color: #337ab7;
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+}
+
+.title_username {
+    color: #5b5b5b;
+    padding-top: 0.8em;
+    padding-left: 0.5em;
+}
+
+.tweet_time {
+    color: #5B5B5BFF;
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+.main_tweet {
+    color: #e5e5e5;
+    text-align: right;
+    padding-right: 3em;
+    padding-left: 2em;
+    padding-top: 2em;
+
+}
+
+.reply_div {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.reply_top_title_name {
+    color: #5b5b5b;
+    padding-top: 0.8em;
+    padding-left: 0.5em;
+}
+
+.reply_top {
+    color: #5B5B5BFF;
+    padding-left: 2em;
+    padding-top: 1em;
+}
+
+.form_bottom {
+
+    position: absolute;
+    bottom: 0;
+    width: 98%;
+
+}
+
+
+.image_div{
+    width: 30em;
+    height: 20em;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+
+.file-input {
+  display: none;
+}

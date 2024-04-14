@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <form id="contact" action="{% url 'accounts:profile' request.user %}" method="post">
+        <div class="row">
+            <div class="container">
+                <div style="text-align: center">
+                    <img src="{% static 'images/twitter_logo.png' %} " width="100px" height="100px" alt="">
+                </div>
+                {% csrf_token %}
+                <div style="padding: 1em">
+                    {{ form }}
+
+                    <div class="inputs" style="padding: 1em">
+
+                        <fieldset>
+                            <div style="padding: 1em">
+                                <button class="btn bg-primary" type="submit">send</button>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

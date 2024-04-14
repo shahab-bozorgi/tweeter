@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div style="display: flex">
+
+        <div>
+            <div class="" style="position: fixed">
+
+                <div style="padding-left: 2.6em;padding-top: 3em;">
+                    <a style="background: #484848;width: 9em;" href="{% url 'home:tweets' %}">
+                        <button style="width: 14em;background: #2c2c2c;color: white" type="button" class="btn btn-secondary btn-lg">
+                            <i
+                                    class="fa fa-home" aria-hidden="true"></i>
+                            Home
+                        </button>
+                    </a>
+                </div>
+
+                <div style="padding-left: 2.6em;padding-top: 1em;">
+
+                    <a style="background: #484848;width: 9em;" href="{% url 'accounts:edit' %}">
+                        <button style="width: 14em;background: #2c2c2c; color: white" type="button" class="btn btn-secondary btn-lg">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                            Setting
+                        </button>
+                    </a>
+                </div>
+
+                <div style="padding-left: 2.6em;padding-top: 1em;">
+                    <a style="background: #484848;width: 9em;" href="{% url 'accounts:logout' %}">
+                        <button style="width: 14em;background: #2c2c2c; color: red" type="button"
+                                class="btn btn-secondary btn-lg">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            logout
+                        </button>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div style="padding-left: 25%">
+            <div class="container">
+                <div style="display: flex">
+                    {% if user.profile.image %}
+                        <span style="margin-top: 0.7em"> <img src="{{ user.profile.image.url }}"
+                                                              width="100px"
+                                                              height="100px" alt=""
+                                                              style="border-radius:100%"></span>
+
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3 class="title_name"
+                        style="color: #e5e5e5; padding-left: 0.5em; padding-top: 0.4em">{{ user.first_name }}</h3>
+
+                    <h5 class="title_name"
+                        style="color: #5b5b5b;padding-left: 0.5em;">
+                        @{{ user.username }}</h5>
+
+                    {% if user.profile.biography %}
+                        <h5 style="color: #e5e5e5; padding-left: 0.5em; padding-top: 0.4em">{{ user.profile.biography }}</h5>
+                    {% endif %}
+                </div>
+
+                <div class="">
+
+
+                    {% for item in tweet %}
+                        {% if request.user.is_authenticated %}
+                            <div class="">
+                            <div style="display: flex">
+                                {% if user.profile.image %}
+                                    <span style="margin-top: 0.7em"> <img src="{{ item.user.profile.image.url }}"
+                                                                          width="40px"
+                                                                          height="40px" alt=""
+                                                                          style="border-radius:100%"></span>
+
+                                {% endif %}
+
+                                <h4 class="title_name"
+                                    style="color: #337ab7; padding-top: 0.5em;padding-left: 0.5em;">{{ item.user.first_name }}</h4>
+                                <h5 class="title_name"
+                                    style="color: #5b5b5b; padding-top: 0.8em;padding-left: 0.5em;">
+                                    @{{ item.user.username }}</h5>
+
+                                <div style="  position: absolute;right: 28%;">
+                                    <p class="description_tweet"
+                                       style="color: #5B5B5BFF;  padding-left: 2em;padding-top: 1em;"> {{ item.created|date:'j F' }}, {{ item.created|time }}  </p>
+                                </div>
+
+
+                            </div>
+
+                            <p class="description_tweet"
+                               style="color: #e5e5e5;text-align: right; padding-right: 3em;    padding-left: 2em;padding-top: 2em;">{{ item.description }}
+                            </p>
+                            {% if item.image %}
+
+                                <div class="image_div" style="margin: 0 auto;
+                                        width: fit-content;">
+                                    <img src="{{ item.image.url }}"
+                                         style="width:30em; height:20em ;right: 25%;border-radius: 1em;">
+
+                                </div>
+                            {% endif %}
+
+                            <div style="display: flex">
+                                <div style="padding-left: 1em;">
+                                    <a class="comment-icon"
+                                       href="{% url 'home:comments' item.id %}"><i class="fa fa-comment-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                {% if is_liked %}
+                                    <div style="padding-left: 1em;">
+                                    <a onclick="like( '{{ tweet.id }}')"> <i id="like" class="fa fa-heart-o"
+                                                                             aria-hidden="true"></i></a>
+                                    <span id="count">{{ tweet.likes.all.count }}</span>
+                                {% else %}
+                                    <div style="padding-left: 1em;">
+                                    <a onclick="like( '{{ tweet.id }}')"> <i id="like" class="fa fa-heart-o"
+                                                                             aria-hidden="true"></i></a>
+                                    <span id="count">{{ tweet.likes.all.count }}</span>
+
+                                {% endif %}
+
+                                </div>
+                                </div>
+
+
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
