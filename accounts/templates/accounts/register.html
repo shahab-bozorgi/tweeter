@@ -11,6 +11,9 @@
 {#    <i style="--clr:#ffffff87;"></i>#}
 {#    <i style="--clr:#1D9BF0;"></i>#}
     <div class="login">
+        <div style="">
+            <img src="{% static 'images/twitter_logo.png' %} " width="100px" height="100px" alt="">
+        </div>
         <h2>Register</h2>
         <form method="post">
             {% csrf_token %}
@@ -22,9 +25,6 @@
             </div>
             <div class="inputBx" style="padding-bottom: 1em;">
                 <input name="password2" type="password" placeholder="Confirm Your Password">
-            </div>
-            <div class="inputBx" style="padding-bottom: 1em;">
-                <input name="email" type="email" placeholder="Enter Your email">
             </div>
 
             <div class="inputBx" style="padding-bottom: 1em;">

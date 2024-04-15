@@ -37,7 +37,6 @@ def user_register(request):
 
     if request.method == 'POST':
         username = request.POST.get('username')
-        email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
@@ -45,7 +44,7 @@ def user_register(request):
             context['Errors'].append("Passwords are not the same")
             return render(request, 'accounts/register.html', context)
 
-        user = User.objects.create(username=username, email=email, password=password1)
+        user = User.objects.create(username=username, password=password1)
         login(request, user)
         return redirect('home:tweets')
     return render(request, 'accounts/register.html')
