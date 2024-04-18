@@ -70,4 +70,6 @@ def user_edit(request):
         form = UserEditForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            return redirect('/')
     return render(request, 'accounts/edit_profile.html', {'form': form})
+

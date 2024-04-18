@@ -72,7 +72,7 @@
                            placeholder="What is happening?!">
                 </div>
 
-                <div style="padding-left: 0.9em">
+                <div class="image-post-input" style="padding-left: 0.9em">
                     {#                    <input type="file" name="image" id="file-upload" class="file-input">#}
                     <label for="image-file">
 
@@ -152,6 +152,7 @@
                                                                          aria-hidden="true"></i></a>
                                 <span id="count">{{ tweet.likes.all.count }}</span>
                             {% endif %}
+
                             </div>
                             </div>
                             <hr>
